@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+div{
+    height: 100px;
+    width: 100px;
+    border: 1px solid red;
+}
+</style>
+<body>
+    <input type="text">
+    <button>提交</button>
+    <div></div>
+    <p></p>
+    <script>
+        var input = document.querySelector('input')
+        var button = document.querySelector('button')
+        var div = document.querySelector('div')
+        var p = document.querySelector('p')
+
+        let socket = new WebSocket('ws://127.0.0.1:3000')
+
+        // 监控链接事件
+        socket.addEventListener('open',function(){
+            div.innerHTML= "链接已建立..."
+        })
+        // 获取发送数据
+        button.addEventListener('click',function(){
+            let value = input.value;
+            socket.send(value)
+        })
+        // 获取接受数据
+        socket.addEventListener('message',function(even){
+            p.innerHTML = even.data
+            // console.log(even.data);
+        })
+        // 监听关闭事件
+        socket.addEventListener('close',function(even){
+            console.log("服务关闭");
+        })
+    </script>
+</body>
+</html>

@@ -3,6 +3,7 @@ const http = require('http');
 const app = express();
 const server = http.createServer(app);
 const { Server } = require("socket.io")
+// 添加跨域配置
 const io = new Server(server,{cors: true});
 
 app.get('/', (req, res) => {

@@ -10,7 +10,7 @@ const  MsgType = {
 const server = ws.createServer(conn => {
     console.log("开始链接");
     count++
-    conn.userName = `用户${count}进入聊天室`
+    conn.userName = `用户${count}`
     broadcast({
         type: MsgType.TYPE_ENTER,
         msg: `${conn.userName}进入聊天室`,
@@ -37,7 +37,7 @@ const server = ws.createServer(conn => {
         })
     })
     conn.on('error',function(){
-        console.log("链接异常");
+        console.log("链接异常/用户离开");
     })
 })
 // 广播

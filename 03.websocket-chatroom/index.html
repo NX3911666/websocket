@@ -42,14 +42,32 @@
             // 字符串转对象
             var data = JSON.parse(even.data)
             var dv = document.createElement('div')
-            if (data.type === 0) {
-                dv.innerHTML= data.msg + data.time + "黄色"
-            }if (data.type === 2) {
-                dv.style.color = 'red'
+            switch(data.type){
+                // 用户进入绿色
+                case 0:
+                    dv.style.color = '#24be50'
+                    dv.innerHTML= data.msg + data.time
+                    break
+                // 用户发言红色
+                case 2:
+                    dv.style.color = 'red'
+                    dv.innerHTML= data.msg + data.time
+                    break
+                // 用户离开灰色
+                default:
+                dv.style.color = '#7f7c7c'
                 dv.innerHTML= data.msg + data.time
-            } else {
-                dv.innerHTML= data.msg + data.time + "黑色"
             }
+            // if (data.type === 0) {
+            //     dv.style.color = '#24be50'
+            //     dv.innerHTML= data.msg + data.time
+            // }else if (data.type === 2) {
+            //     dv.style.color = 'red'
+            //     dv.innerHTML= data.msg + data.time
+            // } else {
+            //     dv.style.color = 'black'
+            //     dv.innerHTML= data.msg + data.time
+            // }
             div.appendChild(dv)
         })
         // 监听关闭事件
